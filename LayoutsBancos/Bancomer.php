@@ -247,9 +247,9 @@ if($TipoPagoDescFinal<15)
   }
 }
 
+$Cuenta="0153512495";
 
-
- $FINAL=$Cuenta."          ".checkFech($FechaBan).$Hora.
+ $FINAL=$Cuenta."      ".checkFech($FechaBan).$Hora.
  $SUCURSAL.$clacon.$TipoPagFinal.$EspaciosAdd."                         +"
  .$EspaciosCeros.$ImporteBanFINAL.$Decimales.$SALDO_DEL_MOVIMIENTO.$REFINT.$Ref2FIN."          ";
 //echo htmlspecialchars_decode($FINAL);
