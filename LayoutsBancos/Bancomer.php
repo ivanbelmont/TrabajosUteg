@@ -211,9 +211,19 @@ $file = fopen("FORMATO BANCOMER".$FechArchivo.".txt", "w");
 
     if ($buscarDecimales>=1) {
     echo $Decimales=mb_substr($DecimalesB,$buscarDecimales+1);#PARA TXT
-    }
+
+    $ContDec=strlen($Decimales);
+    echo "<br>[".$ContDec."]";
+
+    if ($ContDec==1) {
+      $Decimales=$Decimales."0";
+      echo $Decimales;
+                     }
+                             }
       else
-      { echo $Decimales='00'; }
+      { 
+        echo $Decimales='00'; 
+      }
       echo "<br>";
 
    
