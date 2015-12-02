@@ -32,7 +32,7 @@ $array = array_filter($array, function($s)
 
 //echo $array[0]."<br>";
 //var_dump($array);
-
+//$array = str_replace(" ","",$array ); //Nuevo
 /*CANTIDAD DEL ARRAY*/
 $cantidad=count($array);
    
@@ -51,14 +51,19 @@ echo "<textarea>".$cadena_sin_espacios."</textarea>";
 
 ////////////////////////////////////////// AQUI PARA IMPRIMIR RESULTADO ///////////////////////////////////////////////////////////////////////
 $cadena_equipo = implode("<br>", $array);
-/*echo*/ $cadena_equipo."<br>";
+//echo 
+$cadena_equipo."<br>";
 $textoFinal=$cadena_equipo;
 
 
 $buscarInicio="Total";
 echo $resultadoInicio = strpos($textoFinal, $buscarInicio);
 
-$Formatear=strip_tags($textoFinal);//Quitar <br> y demas de html
+ $Formatear=strip_tags($textoFinal);//Quitar <br> y demas de html
+//$Formatear = str_replace(' ', '@', $Formatear);
+
+
+//echo  $Formatear = preg_replace('/[@]{3}/', ' ', $Formatear);
 ?>
 
 
@@ -85,10 +90,29 @@ $texto=$_POST['Envio'];
     $filas=file('Formato.txt');
     foreach($filas as $value){
         
-        list($Unidad, $enlace,$imagen) = explode(" ", $value);
-      /*  echo "<br>";
-        echo $Unidad."<br>".$enlace."<br>".$imagen;
-        echo "<br>";*/
+        list($UnidadT, $enlaceT,$imagenT) = explode(" ", $value);
+
+ $UnidadT."<br>".$enlaceT."<br>".$imagenT."<br>";
+
+ $Unidad = mb_substr($UnidadT, 0,57);
+ $enlace = mb_substr($UnidadT, 57);
+
+        $imagen = $enlaceT;
+
+        if(isset($imagenT))
+        {
+         $imagen = $imagenT;
+          "Exists";
+        }
+        else
+        {
+         $Imagen = $enlaceT;
+        }
+       
+
+       "<br>";
+           "UNIDAD ".$Unidad."<br>ENLACE ".$enlace."<br> Imagen".$imagen;
+         "<br><br><br><br>";
  $num=strlen($Unidad);//NUMERO TOTAL DE CARACTERES DE $Unidad
  "<br>";
  "<br>CIE ";
@@ -96,9 +120,9 @@ $texto=$_POST['Envio'];
  "<br>";
 $CIEFINALX=$CIE;
 
- "<br>REFERENCIA ";
- $REFERENCIA= $CIE = mb_substr($Unidad,5,$num);
- "<br>";
+   "<br>REFERENCIA ";
+   $REFERENCIA= $CIE = mb_substr($Unidad,27,$num);
+   "<br>";
 
  "<br>OTROS ";
 $buscar=".";
@@ -114,7 +138,7 @@ $resultado2 = strpos($comision, $buscar2);
 
 
 
- "<br><br>IMPORTE ";
+  "<br><br>IMPORTE ";
 $buscar3=".";
 $importe=$comision;
 $resultadoI = strpos($importe, $buscar3);
@@ -139,7 +163,7 @@ $comisionF = mb_substr($comisionF, $inicio);//ENTEROS
 $resultadoDecimal = strpos($comision, $buscar3);//15
 $comisionFII=mb_substr($comision, $resultadoDecimal,3);//DECIMALES
 
- $comisionF.$comisionFII;
+  $comisionF.$comisionFII;
 
 
  "<br><br>GUIA CIE ";
@@ -172,11 +196,11 @@ $PlazaSemiFinal = strripos($FechaF, $buscarGion);
 
  "<br><br>SUCURSAL ";
  $SUCURSAL = ereg_replace("[^0-9]", "", $imagen); //Incluir 0 [^0-9]
- $SUCURSAL; // resultado: 123
+  $SUCURSAL; // resultado: 123
 
  "<br><br>TIPO PAGO ";
 $TIPO_PAGO = ereg_replace("[^A-Z]", "", $imagen); //Incluir 0 [^0-9]
- $TIPO_PAGO;
+$TIPO_PAGO;
 
 
 
@@ -191,7 +215,7 @@ $IMPORTESANTANDERII = mb_substr($comisionFII,1);
 $SALDO_DEL_MOVIMIENTO="00000016955078";
 //echo "Año: ".$ANNIO." Mes: ".$MES." Dia: ".$DIA;
 
- "<br><br><label style='color: RED;'> FORMATEADA PARA SANTANDER </label><br>";
+ echo "<br><br><label style='color: RED;'> FORMATEADA PARA SANTANDER </label><br>";
 
 /*echo $FINAL=$CIEFINALX."     ".$MES.$DIA.$ANNIO.$Hora.$SUCURSAL.$clacon.$TIPO_PAGO."                          +".$IMPORTESANTANDER.$IMPORTESANTANDERII.$SALDO_DEL_MOVIMIENTO.
 (int) $CIEFINAL.$REFERENCIA."          ";*/
@@ -239,19 +263,36 @@ if($NuemeroCieFinal<8)
     $CerosAddCIE.= "0";
   }
 }
- $FINAL[]=$CIEFINALX."           ".$MES.$DIA.$ANNIO.$Hora.$CerosAdd.$SUCURSAL.$clacon.$TIPO_PAGO.$EspaciosAdd."                         +".$CerosAddImp.$IMPORTESANTANDER.$IMPORTESANTANDERII.$SALDO_DEL_MOVIMIENTO.$CerosAddCIE.
-(int) $CIEFINAL."".$REFERENCIA."          ";
+
+//echo 
+"CONT REF -> ".$ConREF=strlen($REFERENCIA)."<br>";
+$CIEFINALX='0153512495';
+
+echo "<br><label style='color: BLUE;'> $CIEFINALX </label>"."<label style='color:#ffffff;'>__________</label>"."<label style='background-color: GREEN;'>".$MES.$DIA.$ANNIO."</label>".
+"<label style='background-color: RED;'>".$Hora."</label>"."<label style='color:#9b870c;'> ".$CerosAdd.$SUCURSAL." </label>".
+"<label style='background-color: PURPLE;color:#FFFFFF;'>".$clacon."</label>".
+"<label style='color: PURPLE;'>".$TIPO_PAGO.$EspaciosAdd." </label>"."<label style='color:#ffffff;'>___________________________</label>".
+"<label style='background-color: BLACK;color:#FFFFFF;'>+</label>".
+"<label style='color: GREEN;'> ".$CerosAddImp.$IMPORTESANTANDER.$IMPORTESANTANDERII." </label>".
+"<label style='background-color: GREY;'>00000000000000</label>".
+"<label style='color: RED;'>00000000</label>".
+"<label style='color: Brown;'><b><u>".$REFERENCIA."</u></b></label>";
+echo "<br>";
+
+ $FINAL[]=$CIEFINALX."      ".$MES.$DIA.$ANNIO.$Hora.$CerosAdd.$SUCURSAL.$clacon.$TIPO_PAGO.$EspaciosAdd.
+ "                         +".$CerosAddImp.$IMPORTESANTANDER.$IMPORTESANTANDERII."0000000000000000000000".
+$REFERENCIA."          ";
 $CerosAdd="";
 $EspaciosAdd="";
 $CerosAddImp= "";
 $CerosAddCIE="";
 //echo htmlspecialchars_decode($FINAL);
- "<br>------------------------------------------------------------------------------------------------------------------------------";
+ echo "<br>------------------------------------------------------------------------------------------------------------------------------";
 
 
                 }//END FOREACH
                 $arrayCount=count($FINAL);
-                $file = fopen("FORMATO BANAMEX".$FechArchivo.".txt", "w");
+                $file = fopen("FORMATO BANCOMER".$FechArchivo.".txt", "w");
                 for ($i=0; $i < $arrayCount; $i++) { 
                 fwrite($file, $FINAL[$i]);
                 fwrite($file, "\n");
@@ -259,10 +300,10 @@ $CerosAddCIE="";
                         
 
         fclose($file);
-        $archive = "FORMATO BANAMEX".$FechArchivo.".txt";
+        $archive = "FORMATO BANCOMER".$FechArchivo.".txt";
           ?>
           <script languaje='javascript' type='text/javascript'>
-          location.href="DescargarArchivo.php";
+         // location.href="DescargarArchivo.php";
           </script>
           <?php
               }//END IF(ISSET)

