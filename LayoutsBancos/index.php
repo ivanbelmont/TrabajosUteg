@@ -31,7 +31,13 @@ document.getElementById('IMAGE').src = "IMG/logo-bbva.jpg";
 document.forms.formulario.action= "banorte.php";	
 document.getElementById('IMAGE').src = "IMG/logo_banorte.png";
 	break;
-}
+
+	case 3:
+
+document.forms.formulario.action= "oxxo.php";	
+document.getElementById('IMAGE').src = "IMG/Oxxo_Logo.svg.png";
+	break;
+}//END switch
 
 }
 
@@ -44,6 +50,7 @@ document.getElementById('IMAGE').src = "IMG/logo_banorte.png";
 <option href="#" onclick="javascript:CambiarAction(0);return false;" value="0">Seleciona un Banco</option>
 <option href="#" onclick="javascript:CambiarAction(1);return false;" value="bancomer">Bancomer</option>
 <option href="#" onclick="javascript:CambiarAction(2);return false;" value="banorte">Banorte</option>
+<option href="#" onclick="javascript:CambiarAction(3);return false;" value="banorte">OXXO</option>
 </select>	
 <br><br><input required type="file" name="archivo"><br><br>
 
